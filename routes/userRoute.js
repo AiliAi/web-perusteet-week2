@@ -5,12 +5,7 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 
 router.get('/', userController.user_list_get);
-router.get('/', userController.user_get);
-
-router.get('/:id', (req, res) => {
-  console.log(req.params.id);
-  res.send(userModel.users[req.params.id]);
-});
+router.get('/:id', userController.user_get);
 
 router.post('/', (req, res) => {
     console.log(req.body);
