@@ -10,10 +10,7 @@ const upload = multer({ dest: './uploads/' })
 router.get('/', catController.cat_list_get);
 router.get('/:id', catController.cat_get);
 
-router.post('/', upload.single('cat'), function (req, res) {
-    console.log(req.body, req.file);
-    res.send('With this endpoint you can add cats.')
-  });
+router.post('/', upload.single('cat'), catController.cat_get_create_post);
 /*
 router.get('/:id', (req, res) => {
   console.log(req.params.id);
