@@ -1,6 +1,7 @@
 // Controller
 'use strict';
 const catModel = require('../models/catModel');
+const { validationResult } = require('express-validator');
 
 const cats = catModel.cats;
 
@@ -18,6 +19,11 @@ const cat_get = async (req, res) => {
 const cat_create_post = async (req, res) => {
   console.log('cat_create_post', req.body, req.file);
   // object destructuring
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const {name, age, weight, owner} = req.body;
   const params = [name, age, weight, owner, req.file.filename];
   const cat = await catModel.addCat(params);
