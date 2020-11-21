@@ -11,6 +11,8 @@ const port = 3000;
 
 app.use(cors());
 app.use(express.static('uploads'));
+app.use(express.static('public'));
+app.use('/thumbnails', express.static('thumbnails'));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: false}));
@@ -22,4 +24,3 @@ app.use('/cat', passport.authenticate('jwt', {session: false}), catRoute);
 app.use('/user', passport.authenticate('jwt', {session: false}), userRoute);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
-
